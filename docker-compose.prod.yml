@@ -1,0 +1,36 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    env_file: 
+      - ./backend/.env
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGODB_URI: ${MONGODB_URI}
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongodb
+        
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  mongodb:
+    image: mongo:6.0
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

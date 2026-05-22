@@ -1,0 +1,11 @@
+.env
+/backend/.env
+/backend/.env.test
+/backend/node_modules
+
+/frontend/.env
+/frontend/.env.test
+/frontend/node_modules
+
+/backend/uploads
+/frontend/uploads
